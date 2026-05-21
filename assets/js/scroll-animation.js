@@ -14,7 +14,7 @@ const observer = new IntersectionObserver((entries) => {
             const animatableElements = entry.target.querySelectorAll(
                 ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
                 ".hero-image-placeholder, .skill-card, .timeline-item, " +
-                ".project-card, .contact-text"
+                ".project-card, .contact-text, .social-icon"
             );
 
             animatableElements.forEach((el) => {
@@ -27,7 +27,7 @@ const observer = new IntersectionObserver((entries) => {
             const animatableElements = entry.target.querySelectorAll(
                 ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
                 ".hero-image-placeholder, .skill-card, .timeline-item, " +
-                ".project-card, .contact-text"
+                ".project-card, .contact-text, .social-icon"
             );
 
             animatableElements.forEach((el) => {
@@ -61,7 +61,7 @@ window.addEventListener("scroll", () => {
         const animatableElements = section.querySelectorAll(
             ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
             ".hero-image-placeholder, .skill-card, .timeline-item, " +
-            ".project-card, .contact-text"
+            ".project-card, .contact-text, .social-icon"
         );
 
         animatableElements.forEach((el) => {
