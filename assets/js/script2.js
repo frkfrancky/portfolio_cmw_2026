@@ -20,7 +20,7 @@ let languagedata = {
         "nom": "Rasataharisoa",
         "prenom": "Francky",
         "presentation": "저는 Master 2 CMW 학생입니다",
-    }
+    },
 };
 
 // Fonction qui met à jour le texte selon la langue choisie

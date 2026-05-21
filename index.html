@@ -3,28 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-
-    <script src="assets/js/script.js"></script>
+    <title>Portfolio - Francky Rasataharisoa</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    Portfolio 2026
-    <button id="langue-fr">fr</button>
-    <button id="langue-en">en</button>
-    <button id="langue-kr">kr</button>
+    <!-- Navigation -->
+    <nav class="language-nav">
+        <button id="theme-toggle" class="theme-btn" title="Toggle Dark Mode">🌙</button>
+        <button id="langue-fr" class="lang-btn">FR</button>
+        <button id="langue-en" class="lang-btn">EN</button>
+        <button id="langue-kr" class="lang-btn">KR</button>
+    </nav>
 
-    <p id="nom">vide</p>
-    <p id="prenom">vide</p>
-    <p id="presentation">vide</p>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="imgWrap" id="imgWrap">
+            <img src="assets/image/za2.png" alt="Profile" class="profileImg" />
+        </div>
 
+        <div class="textWrap2" id="textWrap2">
+            <h1 class="name" id="name1">
+                <span class="hero-prenom" data-fr="FRANCKY" data-en="FRANCKY" data-kr="프랭키"></span>
+            </h1>
+            <h2 class="surname" id="surname1" data-fr="RASATAHARISOA" data-en="RASATAHARISOA" data-kr="라사타하리소아"></h2>
+        </div>
+
+        <div class="textWrap" id="textWrap">
+            <h1 class="name" style="opacity: 0.3;" id="name2">
+                <span class="hero-prenom-bg" data-fr="FRANCKY" data-en="FRANCKY" data-kr="프랭키"></span>
+            </h1>
+            <div class="bandenoire"></div>
+            <h2 class="surname" id="surname2" data-fr="RASATAHARISOA" data-en="RASATAHARISOA" data-kr="라사타하리소아"></h2>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+        <h2 class="section-title" data-fr="Compétences" data-en="Skills" data-kr="기술"></h2>
+        <div class="skills-container">
+            <div class="skill-card" data-fr="Web Frontend" data-en="Web Frontend" data-kr="웹 프론트엔드"></div>
+            <div class="skill-card" data-fr="Web Backend" data-en="Web Backend" data-kr="웹 백엔드"></div>
+            <div class="skill-card" data-fr="Responsive Design" data-en="Responsive Design" data-kr="반응형 디자인"></div>
+            <div class="skill-card" data-fr="JavaScript" data-en="JavaScript" data-kr="JavaScript"></div>
+        </div>
+    </section>
+
+    <!-- Academic & Professional Journey Section -->
+    <section id="journey" class="section journey-section">
+        <h2 class="section-title" data-fr="Parcours" data-en="Journey" data-kr="여정"></h2>
+        <div class="timeline">
+            <div class="timeline-item" data-fr="Master 2 CMW" data-en="Master 2 CMW" data-kr="Master 2 CMW"></div>
+            <div class="timeline-item" data-fr="Licence" data-en="Bachelor" data-kr="학사"></div>
+            <div class="timeline-item" data-fr="Expérience Pro" data-en="Professional Experience" data-kr="전문 경험"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+        <h2 class="section-title" data-fr="Projets" data-en="Projects" data-kr="프로젝트"></h2>
+        <div class="projects-container">
+            <div class="project-card" data-fr="Projet 1" data-en="Project 1" data-kr="프로젝트 1"></div>
+            <div class="project-card" data-fr="Projet 2" data-en="Project 2" data-kr="프로젝트 2"></div>
+            <div class="project-card" data-fr="Projet 3" data-en="Project 3" data-kr="프로젝트 3"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <h2 class="section-title" data-fr="Me contacter" data-en="Contact Me" data-kr="연락처"></h2>
+        <div class="contact-content">
+            <p class="contact-text" data-fr="Vous pouvez me contacter via:" data-en="You can reach me at:" data-kr="다음을 통해 저에게 연락할 수 있습니다:"></p>
+        </div>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/language.js"></script>
+    <script src="assets/js/hero-animation.js"></script>
+    <script src="assets/js/scroll-animation.js"></script>
 </body>
-    <script>
-        // console.log(localStorage)
-        console.log(navigator.language);
-        var language = navigator.language || navigator.userLanguage;
-        isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    </script>
-
-    <script src="assets/js/script2.js"></script>
 </html>
