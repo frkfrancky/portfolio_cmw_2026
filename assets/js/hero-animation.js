@@ -10,24 +10,24 @@ window.addEventListener('scroll', () => {
     // Image
     const imgWrap = document.getElementById('imgWrap');
     if (imgWrap) {
-        imgWrap.style.transform = `translateY(${scrollPercentage * 5 * intensity}px)`;
+        imgWrap.style.transform = `translateY(${scrollPercentage * 28 * intensity}px)`;
     }
 
     // Nom avant-plan
     const name1 = document.getElementById('name1');
     if (name1) {
-        name1.style.transform = `translateY(${scrollPercentage * 7 * intensity}px)`;
+        name1.style.transform = `translateY(${scrollPercentage * 14 * intensity}px)`;
     }
 
     // Nom arrière-plan
     const name2 = document.getElementById('name2');
     if (name2) {
-        name2.style.transform = `translateY(${scrollPercentage * 7 * intensity}px)`;
+        name2.style.transform = `translateY(${scrollPercentage * 14 * intensity}px)`;
     }
 
     // Prénom
     const surname2 = document.getElementById('surname2');
     if (surname2) {
-        surname2.style.transform = `translateX(${scrollPercentage * 5 * intensity}px)`;
+        surname2.style.transform = `translateX(${scrollPercentage * 12 * intensity}px)`;
     }
 });
