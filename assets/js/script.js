@@ -40,8 +40,8 @@ function initHelloSvg() {
     const randomTop = Math.random() * 60 - 20; // Between -20px and 40px
     const randomLeft = Math.random() * 60 - 20; // Between -20px and 40px
 
-    // Small random rotation
-    const randomRotation = (Math.random() * 8 - 4); // Between -4deg and 4deg
+    // Small random rotation + 8deg counter-clockwise
+    const randomRotation = (Math.random() * 8 - 4) - 8; // Between -12deg and -4deg
 
     wrapper.style.top = (50 + randomTop) + "px";
     wrapper.style.left = (40 + randomLeft) + "px";
@@ -51,6 +51,13 @@ function initHelloSvg() {
 // Initialize hello SVG on page load
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initHelloSvg);
+    document.addEventListener("DOMContentLoaded", setupHelloSvgAnimationLoop);
 } else {
     initHelloSvg();
+    setupHelloSvgAnimationLoop();
+}
+
+// Setup animation loop for hello SVG - no longer needed with infinite animation
+function setupHelloSvgAnimationLoop() {
+    // Animation is now handled by CSS with infinite loop
 }

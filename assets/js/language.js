@@ -30,8 +30,33 @@ function setLanguage(lang) {
     });
     document.querySelector(`#langue-${lang}`).classList.add("active");
 
+    // Update hello SVG language
+    updateHelloSvgLanguage(lang);
+
     // Store preference
     localStorage.setItem("preferredLanguage", lang);
+}
+
+// Update hello SVG based on language
+function updateHelloSvgLanguage(lang) {
+    const langMap = {
+        "fr": "hello-fr",
+        "en": "hello-en",
+        "kr": "hello-kr"
+    };
+
+    const targetId = langMap[lang] || "hello-en";
+
+    // Hide all language groups
+    document.querySelectorAll("#hello-en, #hello-fr, #hello-kr").forEach((group) => {
+        group.classList.add("hello-hidden");
+    });
+
+    // Show the target language group
+    const targetGroup = document.getElementById(targetId);
+    if (targetGroup) {
+        targetGroup.classList.remove("hello-hidden");
+    }
 }
 
 // Event listeners for language buttons
