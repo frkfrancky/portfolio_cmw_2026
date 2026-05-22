@@ -10,7 +10,7 @@ window.addEventListener('scroll', () => {
     // Image
     const imgWrap = document.getElementById('imgWrap');
     if (imgWrap) {
-        imgWrap.style.transform = `translateY(${scrollPercentage * 28 * intensity}px)`;
+        imgWrap.style.transform = `translateY(${scrollPercentage * 18 * intensity}px)`;
     }
 
     // Nom avant-plan
@@ -29,5 +29,11 @@ window.addEventListener('scroll', () => {
     const surname2 = document.getElementById('surname2');
     if (surname2) {
         surname2.style.transform = `translateX(${scrollPercentage * 12 * intensity}px)`;
+    }
+
+    // Silhouette image - less sensitive to scroll
+    const silhouetteWrap = document.getElementById('silhouette-wrap');
+    if (silhouetteWrap) {
+        silhouetteWrap.style.transform = `translateY(${scrollPercentage * 8 * intensity}px)`;
     }
 });

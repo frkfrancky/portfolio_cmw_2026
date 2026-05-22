@@ -31,20 +31,14 @@ if (document.readyState === "loading") {
     initTheme();
 }
 
-// Hello SVG Animation - Random Position and Rotation
+// Hello SVG Animation - Fixed Position and Rotation
 function initHelloSvg() {
     const wrapper = document.getElementById("hello-svg-wrapper");
     if (!wrapper) return;
 
-    // Random position within top-left corner area of hero section
-    const randomTop = Math.random() * 60 - 20; // Between -20px and 40px
-    const randomLeft = Math.random() * 60 - 20; // Between -20px and 40px
-
     // Small random rotation + 8deg counter-clockwise
     const randomRotation = (Math.random() * 8 - 4) - 8; // Between -12deg and -4deg
 
-    wrapper.style.top = (50 + randomTop) + "px";
-    wrapper.style.left = (40 + randomLeft) + "px";
     wrapper.style.transform = `rotate(${randomRotation}deg)`;
 }
 

@@ -13,7 +13,7 @@ const observer = new IntersectionObserver((entries) => {
             // Animate all animatable elements in the section
             const animatableElements = entry.target.querySelectorAll(
                 ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
-                ".hero-image-placeholder, .skill-card, .timeline-item, " +
+                ".hero-image-placeholder, .skill-card, .skill-card-grid, .silhouette-img, .timeline-item, " +
                 ".project-card, .contact-text, .social-icon"
             );
 
@@ -26,7 +26,7 @@ const observer = new IntersectionObserver((entries) => {
 
             const animatableElements = entry.target.querySelectorAll(
                 ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
-                ".hero-image-placeholder, .skill-card, .timeline-item, " +
+                ".hero-image-placeholder, .skill-card, .silhouette-img, .timeline-item, " +
                 ".project-card, .contact-text, .social-icon"
             );
 
@@ -60,7 +60,7 @@ window.addEventListener("scroll", () => {
         // Apply progressive transforms to elements based on scroll
         const animatableElements = section.querySelectorAll(
             ".section-title, .hero-prenom, .hero-nom, .hero-subtitle, " +
-            ".hero-image-placeholder, .skill-card, .timeline-item, " +
+            ".hero-image-placeholder, .skill-card, .skill-card-grid, .silhouette-img, .timeline-item, " +
             ".project-card, .contact-text, .social-icon"
         );
 
