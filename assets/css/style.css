@@ -594,7 +594,9 @@ body.dark .skills-section {
 
 .skill-card-grid {
     padding: 30px 20px;
-    background: var(--primary-violet);
+    background:
+        radial-gradient(transparent 60%, rgba(0, 0, 0, 0.548)),
+        var(--primary-violet);
     border: 2px solid var(--primary-violet);
     border-radius: 12px;
     text-align: center;
@@ -612,6 +614,38 @@ body.dark .skills-section {
     min-height: 120px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+.skill-card-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.25) 0px,
+        rgba(255, 255, 255, 0.25) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    background-size: 100% 8px;
+    background-position: 0 0;
+    pointer-events: none;
+    animation: crtScan 2s linear infinite;
+    z-index: 10;
+    border-radius: 12px;
+}
+
+@keyframes crtScan {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 8px;
+    }
 }
 
 .skill-card-extra {
