@@ -1,18 +1,12 @@
-// Journey Section - Simple Sticky like the example
+// Journey Section - Sticky with SVG animation
 const journeySection = document.getElementById('journey');
+const stickyContainer = document.getElementById('sticky-container');
 const educationCards = document.querySelectorAll('.education-card');
 const ac1Svg = document.getElementById('ac1-svg');
 const journeyProgress_container = document.querySelector('.journey-progress');
 
 const totalEducationPoints = educationCards.length;
 let currentCardIndex = 0;
-let stickyTop = journeySection.offsetTop;
-let stickyStartScroll = 0;
-
-// Recalculate stickyTop on window resize to handle responsive layout changes
-window.addEventListener('resize', () => {
-    stickyTop = journeySection.offsetTop;
-});
 
 function updateEducationCard(index) {
     educationCards.forEach(card => {
@@ -45,23 +39,23 @@ function updateSvgPosition(scrollAmount) {
 }
 
 window.addEventListener('scroll', () => {
-    if (!journeySection) return;
+    if (!stickyContainer) return;
 
-    // Simple sticky logic like the example
-    if (window.pageYOffset > stickyTop) {
-        if (!journeySection.classList.contains('sticky')) {
-            journeySection.classList.add('sticky');
-        }
+    const containerRect = stickyContainer.getBoundingClientRect();
 
-        // Animate SVG based on scroll within the sticky section (like rasataharisoa)
-        const scrollDelta = window.pageYOffset - stickyTop;
-        updateSvgPosition(scrollDelta);
-    } else {
-        if (journeySection.classList.contains('sticky')) {
-            journeySection.classList.remove('sticky');
-        }
-        updateSvgPosition(0);
-    }
+    // Distance qu'on peut scroller à l'intérieur du conteneur
+    const scrollableDistance = containerRect.height - window.innerHeight;
+
+    // Pixels déjà scrollés
+    const scrolledInContainer = -containerRect.top;
+
+    // Ratio entre 0 et 1
+    let scrollRatio = scrolledInContainer / scrollableDistance;
+    scrollRatio = Math.max(0, Math.min(1, scrollRatio));
+
+    // Animate SVG based on scroll progress through the sticky container
+    const scrollAmount = scrollRatio * 1000; // Ajuste ce multiplicateur si besoin
+    updateSvgPosition(scrollAmount);
 }, { passive: true });
 
 // Initialize
