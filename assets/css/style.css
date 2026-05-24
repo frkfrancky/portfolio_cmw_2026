@@ -877,6 +877,36 @@ body.dark .journey-section {
     justify-content: center;
 }
 
+/* Dynamic info container for progress */
+.journey-info-dynamic {
+    margin-top: 2rem;
+    text-align: center;
+    max-width: 600px;
+    padding: 2rem;
+    background: rgba(124, 58, 237, 0.1);
+    border: 2px solid var(--primary-violet);
+    border-radius: 12px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.journey-info-dynamic h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-violet);
+    font-weight: 700;
+}
+
+.journey-info-dynamic p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
 .education-card {
     padding: 40px;
     background: var(--bg-secondary);
@@ -923,27 +953,63 @@ body.dark .journey-section {
     font-style: italic;
 }
 
-.journey-progress {
+/* Progress bar container */
+.progress-bar-container {
     position: absolute;
-    bottom: 8.32vh;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 120px;
+    bottom: 20px;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    z-index: 50;
+}
+
+/* Progress track line */
+.progress-track {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: rgba(124, 58, 237, 0.3);
+    z-index: 1;
+}
+
+/* Progress points */
+.progress-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(124, 58, 237, 0.5);
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.progress-point.active {
+    background: #7C3AED;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.8);
+}
+
+/* Moving SVG image */
+.progress-image {
+    position: absolute;
+    left: 0%;
+    z-index: 3;
+    width: 60px;
+    height: 40px;
+    transition: left 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.8));
 }
 
 .journey-svg {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    left: 0;
-    bottom: 0;
-    z-index: 5;
-    filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.3));
+    width: 100%;
+    height: 100%;
 }
 
 body.light .ac1-shape {

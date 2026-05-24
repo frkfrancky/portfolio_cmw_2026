@@ -164,52 +164,70 @@
                 <!-- Images placeholder - TODO: add images -->
             </div>
 
-            <!-- Right side - Education Cards -->
+            <!-- Right side - Dynamic Info -->
             <div class="journey-info">
-                <div class="education-card" data-index="0">
-                    <h3 class="education-school" data-fr="Lycée Saint François Xavier Antanimena" data-en="Saint François Xavier Antanimena High School" data-kr="생프랑수아 자비에 안타니메나 고등학교"></h3>
-                    <p class="education-degree" data-fr="Baccalauréat" data-en="Baccalaureate" data-kr="학위"></p>
-                    <p class="education-years">2017 - 2018</p>
-                </div>
-                <div class="education-card" data-index="1">
-                    <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
-                    <p class="education-degree" data-fr="Licence Développement d'Application internet et intranet" data-en="Bachelor in Web and Intranet Application Development" data-kr="웹 및 인트라넷 응용 프로그램 개발 학사"></p>
-                    <p class="education-years">2019 - 2022</p>
-                </div>
-                <div class="education-card" data-index="2">
-                    <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
-                    <p class="education-degree" data-fr="Master en Modélisation et Ingénierie Informatique" data-en="Master in Modeling and Computer Engineering" data-kr="모델링 및 컴퓨터 공학 석사"></p>
-                    <p class="education-years">2022 - 2024</p>
-                </div>
-                <div class="education-card" data-index="3">
-                    <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
-                    <p class="education-degree" data-fr="Master 2 en Système Intelligent et Applications" data-en="Master 2 in Intelligent Systems and Applications" data-kr="지능형 시스템 및 응용 프로그램 석사 2학년"></p>
-                    <p class="education-years">2024 - 2025</p>
-                </div>
-                <div class="education-card active" data-index="4">
-                    <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
-                    <p class="education-degree" data-fr="Master 2 en CMW" data-en="Master 2 in CMW" data-kr="CMW 석사 2학년"></p>
-                    <p class="education-years">2025 - 2026</p>
+                <div id="dynamic-info" class="journey-info-dynamic">
+                    <h3 id="info-title">Lycée</h3>
+                    <p id="info-text">Baccalauréat</p>
                 </div>
             </div>
         </div>
 
-        <!-- Progress bar with SVG -->
-        <div class="journey-progress">
-            <svg class="journey-svg" id="ac1-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 482 305">
-                <style type="text/css">
-                    .ac1-shape{fill:#7C3AED;}
-                </style>
-                <polygon class="ac1-shape" points="93,164 102,161 115,159 265,157 276.21,157 285,159 294.94,164 318,180 335,197 357,218 364.04,221
-                    383,229 395,236 400,241 402,246 402,254.34 404,261 404,273.74 404,278.85 396,282 386,285 380.72,285 378,287 374,295 364,302
-                    351.79,302 344,298 334,290 171,287 164,300 155,305 147.87,305 136.98,305 131,301 127,294 123,288 102,286 90.35,283.62 89,276
-                    89,175.36 90.35,167.53 "/>
-            </svg>
+        <!-- Invisible education cards (data source for journey info) -->
+        <div class="education-card" data-index="0" style="display: none;">
+            <h3 class="education-school" data-fr="Lycée Saint François Xavier Antanimena" data-en="Saint François Xavier Antanimena High School" data-kr="생프랑수아 자비에 안타니메나 고등학교"></h3>
+            <p class="education-degree" data-fr="Baccalauréat" data-en="Baccalaureate" data-kr="학위"></p>
+            <p class="education-years">2017 - 2018</p>
+        </div>
+        <div class="education-card" data-index="1" style="display: none;">
+            <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
+            <p class="education-degree" data-fr="Licence Développement d'Application internet et intranet" data-en="Bachelor in Web and Intranet Application Development" data-kr="웹 및 인트라넷 응용 프로그램 개발 학사"></p>
+            <p class="education-years">2019 - 2022</p>
+        </div>
+        <div class="education-card" data-index="2" style="display: none;">
+            <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
+            <p class="education-degree" data-fr="Master en Modélisation et Ingénierie Informatique" data-en="Master in Modeling and Computer Engineering" data-kr="모델링 및 컴퓨터 공학 석사"></p>
+            <p class="education-years">2022 - 2024</p>
+        </div>
+        <div class="education-card" data-index="3" style="display: none;">
+            <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
+            <p class="education-degree" data-fr="Master 2 en Système Intelligent et Applications" data-en="Master 2 in Intelligent Systems and Applications" data-kr="지능형 시스템 및 응용 프로그램 석사 2학년"></p>
+            <p class="education-years">2024 - 2025</p>
+        </div>
+        <div class="education-card" data-index="4" style="display: none;">
+            <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
+            <p class="education-degree" data-fr="Master 2 en CMW" data-en="Master 2 in CMW" data-kr="CMW 석사 2학년"></p>
+            <p class="education-years">2025 - 2026</p>
+        </div>
+
+        <!-- Progress bar with points and moving SVG -->
+        <div class="progress-bar-container">
+            <div class="progress-track"></div>
+
+            <!-- 5 progress points for each education level (leaving space for 6th point at end) -->
+            <div class="progress-point" style="left: 0%;"></div>
+            <div class="progress-point" style="left: 20%;"></div>
+            <div class="progress-point" style="left: 40%;"></div>
+            <div class="progress-point" style="left: 60%;"></div>
+            <div class="progress-point" style="left: 80%;"></div>
+
+            <!-- Moving SVG indicator -->
+            <div class="progress-image" id="progress-image">
+                <svg class="journey-svg" id="ac1-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 482 305" width="60" height="40">
+                    <style type="text/css">
+                        .ac1-shape{fill:#7C3AED;}
+                    </style>
+                    <polygon class="ac1-shape" points="93,164 102,161 115,159 265,157 276.21,157 285,159 294.94,164 318,180 335,197 357,218 364.04,221
+                        383,229 395,236 400,241 402,246 402,254.34 404,261 404,273.74 404,278.85 396,282 386,285 380.72,285 378,287 374,295 364,302
+                        351.79,302 344,298 334,290 171,287 164,300 155,305 147.87,305 136.98,305 131,301 127,294 123,288 102,286 90.35,283.62 89,276
+                        89,175.36 90.35,167.53 "/>
+                </svg>
+            </div>
         </div>
 
         <!-- Black banner at bottom -->
         <div class="bandenoire-journey">
-            <div class="bandenoire-trigger"></div>
+            <!-- <div class="bandenoire-trigger"></div> -->
         </div>
     </section>
 

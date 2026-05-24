@@ -4,9 +4,28 @@
 	 viewBox="0 0 482 305" style="enable-background:new 0 0 482 305;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#1F1F27;}
+	.journey-point{
+		fill:#7C3AED;
+		opacity:0.5;
+		transition:opacity 0.3s ease;
+		stroke:#7C3AED;
+		stroke-width:1.5;
+		filter: drop-shadow(0 0 4px rgba(124, 58, 237, 0.5));
+	}
+	.journey-point.active{
+		opacity:1;
+		filter: drop-shadow(0 0 8px rgba(124, 58, 237, 1));
+	}
 </style>
-<polygon class="st0" points="93,164 102,161 115,159 265,157 276.21,157 285,159 294.94,164 318,180 335,197 357,218 364.04,221 
-	383,229 395,236 400,241 402,246 402,254.34 404,261 404,273.74 404,278.85 396,282 386,285 380.72,285 378,287 374,295 364,302 
-	351.79,302 344,298 334,290 171,287 164,300 155,305 147.87,305 136.98,305 131,301 127,294 123,288 102,286 90.35,283.62 89,276 
+<polygon class="st0" points="93,164 102,161 115,159 265,157 276.21,157 285,159 294.94,164 318,180 335,197 357,218 364.04,221
+	383,229 395,236 400,241 402,246 402,254.34 404,261 404,273.74 404,278.85 396,282 386,285 380.72,285 378,287 374,295 364,302
+	351.79,302 344,298 334,290 171,287 164,300 155,305 147.87,305 136.98,305 131,301 127,294 123,288 102,286 90.35,283.62 89,276
 	89,175.36 90.35,167.53 "/>
+
+<!-- 5 journey points corresponding to education levels -->
+<circle class="journey-point journey-point-0" cx="120" cy="175" r="15"/>
+<circle class="journey-point journey-point-1" cx="200" cy="210" r="15"/>
+<circle class="journey-point journey-point-2" cx="280" cy="245" r="15"/>
+<circle class="journey-point journey-point-3" cx="360" cy="265" r="15"/>
+<circle class="journey-point journey-point-4" cx="400" cy="280" r="15"/>
 </svg>
