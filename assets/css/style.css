@@ -811,6 +811,7 @@ body.dark .skills-section {
 .journey-section {
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 0;
     padding-bottom: 0;
     background-image: radial-gradient(circle, rgba(150, 150, 150, 0.18) 1.5px, transparent 1.5px);
     background-size: 40px 40px;
@@ -842,6 +843,8 @@ body.dark .journey-section {
     font-size: 3.5rem;
     font-weight: 700;
     letter-spacing: 3px;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 .journey-container {
@@ -854,13 +857,14 @@ body.dark .journey-section {
     flex: 1;
     align-items: center;
     justify-content: center;
+    padding-bottom: 8.32vh;
 }
 
 .journey-images {
     background: rgba(255, 0, 0, 0.1);
     border: 2px dashed rgba(255, 0, 0, 0.3);
     border-radius: 12px;
-    min-height: 500px;
+    min-height: 470px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -923,7 +927,7 @@ body.dark .journey-section {
 
 .journey-progress {
     position: absolute;
-    bottom: 20.8vh;
+    bottom: 8.32vh;
     left: 0;
     right: 0;
     width: 100%;
@@ -944,6 +948,14 @@ body.dark .journey-section {
     filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.3));
 }
 
+body.light .ac1-shape {
+    fill: var(--text-dark);
+}
+
+body.dark .ac1-shape {
+    fill: #FFFFFF;
+}
+
 .bandenoire-journey {
     position: absolute;
     width: 100%;
@@ -952,7 +964,7 @@ body.dark .journey-section {
     right: 0;
     background-color: var(--text-dark);
     z-index: 0;
-    height: 20.8vh;
+    height: 8.32vh;
 }
 
 .bandenoire-trigger {
@@ -966,9 +978,14 @@ body.dark .journey-section {
 }
 
 @media (max-width: 768px) {
+    .journey-section .section-title {
+        padding-top: 50px;
+    }
+
     .journey-container {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding-bottom: 200px;
     }
 
     .journey-images {
