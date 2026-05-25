@@ -8,19 +8,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const infoTitle = document.getElementById("info-title");
     const infoText = document.getElementById("info-text");
 
-    const educationCards = document.querySelectorAll(".education-card");
+    // Wait for content loader to load data
+    let educationData = [];
 
-    // Extract education data from DOM cards
-    const educationData = Array.from(educationCards).map(card => {
-        const schoolElement = card.querySelector(".education-school");
-        const degreeElement = card.querySelector(".education-degree");
-        const yearsElement = card.querySelector(".education-years");
+    // Function to initialize education data
+    async function initializeEducationData() {
+        const education = contentLoader.getEducation();
+        if (education) {
+            educationData = education.map(item => ({
+                title: item.school,
+                text: `${item.degree}\n${item.years}`
+            }));
+        }
+        return educationData;
+    }
 
-        return {
-            title: schoolElement ? schoolElement.textContent : "",
-            text: `${degreeElement ? degreeElement.textContent : ""}\n${yearsElement ? yearsElement.textContent : ""}`
-        };
-    });
+    // Initialize data immediately if already loaded, otherwise wait
+    if (contentLoader.data) {
+        initializeEducationData();
+    } else {
+        // Wait a bit for content to load
+        setTimeout(() => {
+            initializeEducationData();
+        }, 100);
+    }
 
     let currentIndex = -1;
     let ticking = false;
@@ -69,6 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 point.classList.remove('active');
             }
         });
+
+        // Update journey parallax animation
+        // Calculate which education segment we're in (0-4)
+        const educationIndex = Math.min(4, Math.max(0, Math.floor(progress * 5)));
+
+        // Calculate the scroll ratio within this education segment (0-1)
+        const segmentStart = educationIndex * 0.2;
+        const segmentEnd = (educationIndex + 1) * 0.2;
+        const scrollRatioInSegment = (progress - segmentStart) / (segmentEnd - segmentStart);
+
+        // Update parallax with normalized ratio (0-1)
+        if (typeof updateJourneyParallax === 'function') {
+            updateJourneyParallax(scrollRatioInSegment, educationIndex);
+        }
 
         ticking = false;
     }

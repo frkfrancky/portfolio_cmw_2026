@@ -1,0 +1,215 @@
+{
+    "fr": {
+        "hero": {
+            "nom": "Rasataharisoa",
+            "prenom": "Francky",
+            "presentation": "Je suis un étudiant en Master 2 CMW"
+        },
+        "education": [
+            {
+                "index": 0,
+                "school": "Lycée Saint François Xavier Antanimena",
+                "degree": "Baccalauréat",
+                "years": "2017 - 2018"
+            },
+            {
+                "index": 1,
+                "school": "Université de Fianarantsoa",
+                "degree": "Licence Développement d'Application internet et intranet",
+                "years": "2019 - 2022"
+            },
+            {
+                "index": 2,
+                "school": "Université de Fianarantsoa",
+                "degree": "Master en Modélisation et Ingénierie Informatique",
+                "years": "2022 - 2024"
+            },
+            {
+                "index": 3,
+                "school": "Université Gustave Eiffel",
+                "degree": "Master 2 en Système Intelligent et Applications",
+                "years": "2024 - 2025"
+            },
+            {
+                "index": 4,
+                "school": "Université Gustave Eiffel",
+                "degree": "Master 2 en CMW",
+                "years": "2025 - 2026"
+            }
+        ],
+        "skills": [
+            "UI/UX Design",
+            "Front-end",
+            "Back-end",
+            "IA",
+            "Géomatique",
+            "Base de données",
+            "Game Development",
+            "Production musicale",
+            "Art numérique",
+            "Dessin",
+            "Montage vidéo"
+        ],
+        "projects": [
+            {
+                "title": "Projet 1",
+                "description": "Description du projet 1"
+            },
+            {
+                "title": "Projet 2",
+                "description": "Description du projet 2"
+            },
+            {
+                "title": "Projet 3",
+                "description": "Description du projet 3"
+            }
+        ],
+        "contact": {
+            "email": "francky@example.com",
+            "linkedin": "https://linkedin.com/in/francky",
+            "github": "https://github.com/francky"
+        }
+    },
+    "en": {
+        "hero": {
+            "nom": "Rasataharisoa",
+            "prenom": "Francky",
+            "presentation": "I am a Master 2 CMW student"
+        },
+        "education": [
+            {
+                "index": 0,
+                "school": "Saint François Xavier Antanimena High School",
+                "degree": "Baccalaureate",
+                "years": "2017 - 2018"
+            },
+            {
+                "index": 1,
+                "school": "University of Fianarantsoa",
+                "degree": "Bachelor in Web and Intranet Application Development",
+                "years": "2019 - 2022"
+            },
+            {
+                "index": 2,
+                "school": "University of Fianarantsoa",
+                "degree": "Master in Modeling and Computer Engineering",
+                "years": "2022 - 2024"
+            },
+            {
+                "index": 3,
+                "school": "Gustave Eiffel University",
+                "degree": "Master 2 in Intelligent Systems and Applications",
+                "years": "2024 - 2025"
+            },
+            {
+                "index": 4,
+                "school": "Gustave Eiffel University",
+                "degree": "Master 2 in CMW",
+                "years": "2025 - 2026"
+            }
+        ],
+        "skills": [
+            "UI/UX Design",
+            "Front-end",
+            "Back-end",
+            "AI",
+            "Geomatics",
+            "Database",
+            "Game Development",
+            "Music Production",
+            "Digital Art",
+            "Drawing",
+            "Video Editing"
+        ],
+        "projects": [
+            {
+                "title": "Project 1",
+                "description": "Project 1 description"
+            },
+            {
+                "title": "Project 2",
+                "description": "Project 2 description"
+            },
+            {
+                "title": "Project 3",
+                "description": "Project 3 description"
+            }
+        ],
+        "contact": {
+            "email": "francky@example.com",
+            "linkedin": "https://linkedin.com/in/francky",
+            "github": "https://github.com/francky"
+        }
+    },
+    "kr": {
+        "hero": {
+            "nom": "Rasataharisoa",
+            "prenom": "Francky",
+            "presentation": "저는 Master 2 CMW 학생입니다"
+        },
+        "education": [
+            {
+                "index": 0,
+                "school": "생프랑수아 자비에 안타니메나 고등학교",
+                "degree": "학위",
+                "years": "2017 - 2018"
+            },
+            {
+                "index": 1,
+                "school": "피아나란차 대학교",
+                "degree": "웹 및 인트라넷 응용 프로그램 개발 학사",
+                "years": "2019 - 2022"
+            },
+            {
+                "index": 2,
+                "school": "피아나란차 대학교",
+                "degree": "모델링 및 컴퓨터 공학 석사",
+                "years": "2022 - 2024"
+            },
+            {
+                "index": 3,
+                "school": "구스타브 에펠 대학교",
+                "degree": "지능형 시스템 및 응용 프로그램 석사 2학년",
+                "years": "2024 - 2025"
+            },
+            {
+                "index": 4,
+                "school": "구스타브 에펠 대학교",
+                "degree": "CMW 석사 2학년",
+                "years": "2025 - 2026"
+            }
+        ],
+        "skills": [
+            "UI/UX 디자인",
+            "프론트엔드",
+            "백엔드",
+            "AI",
+            "지리정보",
+            "데이터베이스",
+            "게임 개발",
+            "음악 제작",
+            "디지털 아트",
+            "드로잉",
+            "비디오 편집"
+        ],
+        "projects": [
+            {
+                "title": "프로젝트 1",
+                "description": "프로젝트 1 설명"
+            },
+            {
+                "title": "프로젝트 2",
+                "description": "프로젝트 2 설명"
+            },
+            {
+                "title": "프로젝트 3",
+                "description": "프로젝트 3 설명"
+            }
+        ],
+        "contact": {
+            "email": "francky@example.com",
+            "linkedin": "https://linkedin.com/in/francky",
+            "github": "https://github.com/francky"
+        }
+    }
+}
