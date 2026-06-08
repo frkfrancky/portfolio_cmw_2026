@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(timeout 10 bash -c 'until curl -s http://localhost:8000 > /dev/null 2>&1; do sleep 0.5; done; echo \"Server ready\"')",
-      "PowerShell(Start-Process \"http://localhost:8000\")"
-    ]
-  }
-}
