@@ -18,7 +18,7 @@ const observer = new IntersectionObserver((entries) => {
             );
 
             animatableElements.forEach((el) => {
-                el.classList.add("visible");
+                el.classList.add("animate-in");
             });
         } else {
             // Reset animation for elements outside view
@@ -31,7 +31,7 @@ const observer = new IntersectionObserver((entries) => {
             );
 
             animatableElements.forEach((el) => {
-                el.classList.remove("visible");
+                el.classList.remove("animate-in");
             });
         }
     });
@@ -65,7 +65,7 @@ window.addEventListener("scroll", () => {
         );
 
         animatableElements.forEach((el) => {
-            if (el.classList.contains("visible")) {
+            if (el.classList.contains("animate-in")) {
                 // Progressive animation based on scroll position
                 const translateY = Math.max(0, (1 - scrollProgress) * 20);
                 const opacity = Math.min(1, scrollProgress * 1.5);

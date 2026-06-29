@@ -55,3 +55,35 @@ if (document.readyState === "loading") {
 function setupHelloSvgAnimationLoop() {
     // Animation is now handled by CSS with infinite loop
 }
+
+// Legal Modal Management
+function openLegalModal() {
+    const modal = document.getElementById('legal-modal');
+    if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeLegalModal() {
+    const modal = document.getElementById('legal-modal');
+    if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('legal-modal');
+    if (modal && e.target === modal) {
+        closeLegalModal();
+    }
+});
+
+// Close modal when pressing Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLegalModal();
+    }
+});
