@@ -241,7 +241,7 @@
         <div id="spacer" style="height: 10000px; margin-top: -100vh; z-index: 1;"></div>
     </div>
 
-    <!-- Projects Section -->
+<!-- Projects Section -->
     <section id="projects" class="section projects-section">
         <h2 class="section-title" data-label="sectionProjects"></h2>
         <div id="projects-gallery"></div>
@@ -261,8 +261,71 @@
         <h2 class="section-title" data-label="sectionContact"></h2>
         <div class="contact-content">
             <p class="contact-text" data-label="contactText"></p>
+
+            <div class="contact-email">
+                <a href="mailto:frkfrancky@gmail.com" class="email-link">frkfrancky@gmail.com</a>
+            </div>
+
+            <div class="contact-social-links">
+                <a href="https://github.com/frkfrancky" target="_blank" class="social-icon" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/francky-rasataharisoa-540562253/" target="_blank" class="social-icon" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://www.instagram.com/francky.rasata/" target="_blank" class="social-icon" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><circle cx="17.5" cy="6.5" r="1.5"></circle></svg>
+                </a>
+            </div>
+
+            <div class="contact-legal">
+                <button onclick="openLegalModal()" class="legal-link">Mentions légales</button>
+            </div>
         </div>
     </section>
+
+    <!-- Legal Modal -->
+    <div id="legal-modal" class="legal-modal">
+        <div class="legal-modal-content">
+            <div class="legal-modal-close" onclick="closeLegalModal()">×</div>
+            <h2>Mentions légales</h2>
+            <div class="legal-modal-body">
+                <h3>Responsable de publication</h3>
+                <p><strong>Nom :</strong> Francky Rasataharisoa</p>
+                <p><strong>Email :</strong> frkfrancky@gmail.com</p>
+
+                <h3>Hébergement</h3>
+                <p>Ce site est hébergé sur GitHub Pages.</p>
+
+                <h3>Propriété intellectuelle</h3>
+                <p>Le contenu, les textes, les images et les éléments graphiques présents sur ce site sont la propriété intellectuelle de Francky Rasataharisoa, sauf indication contraire. Toute reproduction ou utilisation sans autorisation est interdite.</p>
+
+                <h3>Responsabilité</h3>
+                <p>L'auteur du site s'efforce de fournir des informations exactes, mais ne peut garantir l'absence d'erreurs ou d'omissions. L'auteur ne peut être tenu responsable des dommages directs ou indirects résultant de l'accès ou de l'utilisation du site.</p>
+
+                <h3>Liens externes</h3>
+                <p>Ce site peut contenir des liens vers des sites externes. L'auteur n'est pas responsable du contenu de ces sites tiers et ne peut garantir la disponibilité ou la sécurité de ces liens.</p>
+
+                <h3>Protection des données</h3>
+                <p>Votre vie privée est importante. Ce site ne collecte pas de données personnelles sans votre consentement. Les informations que vous partagez (par email) seront traitées de manière confidentielle.</p>
+
+                <h3>Utilisation de l'Intelligence Artificielle</h3>
+                <p>Ce site a été développé avec l'aide d'outils d'intelligence artificielle, notamment :</p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Raisonnement et conception :</strong> Assistance pour la logique de programmation et l'architecture du site</li>
+                    <li><strong>Recherche et résolution de problèmes :</strong> Aide pour identifier et résoudre les défis techniques</li>
+                    <li><strong>Traduction de données :</strong> Support pour la traduction et l'adaptation multilingue du contenu (français, anglais, coréen)</li>
+                    <li><strong>Autocomplétion et édition de code :</strong> Assistance à l'édition via les fonctionnalités d'autocomplétion de Visual Studio Code</li>
+                </ul>
+                <p>Ces outils ont été utilisés comme aides au développement et n'affectent pas la qualité ou la sécurité du contenu fourni.</p>
+
+                <h3>Contact</h3>
+                <p>Pour toute question ou réclamation, veuillez contacter : <a href="mailto:frkfrancky@gmail.com">frkfrancky@gmail.com</a></p>
+
+                <p style="margin-top: 30px; font-size: 0.9rem; opacity: 0.7;">Dernière mise à jour : 2026</p>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/content-loader.js"></script>
