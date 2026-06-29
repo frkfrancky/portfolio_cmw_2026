@@ -23,14 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return educationData;
     }
 
-    // Initialize data immediately if already loaded, otherwise wait
+    // Initialize data and ensure it's loaded before first update
+    async function initializeAndUpdate() {
+        await initializeEducationData();
+        updateProgress();
+    }
+
     if (contentLoader.data) {
-        initializeEducationData();
+        initializeAndUpdate();
     } else {
-        // Wait a bit for content to load
-        setTimeout(() => {
-            initializeEducationData();
-        }, 100);
+        // Wait for content to load
+        setTimeout(initializeAndUpdate, 100);
     }
 
     let currentIndex = -1;
@@ -52,11 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         progress = Math.max(0, Math.min(1, progress || 0));
 
-        // Move the SVG image from left to right
+        // Move the SVG image from left to right (goes to 100% like a 7th invisible point)
         progressImage.style.left = `calc(${progress * 100}% - ${progress * 30}px)`;
 
-        // Determine current education index (0 to 4)
-        let newIndex = Math.min(4, Math.max(0, Math.floor(progress * 5)));
+        // Determine current education index (0 to 5)
+        let newIndex = Math.min(5, Math.max(0, Math.floor(progress * 6)));
 
         // Update text with fade effect
         if (newIndex !== currentIndex && educationData[newIndex]) {
@@ -73,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Light up points as progress passes them
         progressPoints.forEach((point, index) => {
-            const pointPosition = index * 0.2; // 0%, 20%, 40%, 60%, 80%
+            const pointPosition = index / 6; // 0%, 16.67%, 33.33%, 50%, 66.67%, 83.33%
             if (progress >= pointPosition) {
                 point.classList.add('active');
             } else {
@@ -82,12 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Update journey parallax animation
-        // Calculate which education segment we're in (0-4)
-        const educationIndex = Math.min(4, Math.max(0, Math.floor(progress * 5)));
+        // Calculate which education segment we're in (0-5)
+        const educationIndex = Math.min(5, Math.max(0, Math.floor(progress * 6)));
 
         // Calculate the scroll ratio within this education segment (0-1)
-        const segmentStart = educationIndex * 0.2;
-        const segmentEnd = (educationIndex + 1) * 0.2;
+        const segmentStart = educationIndex / 6;
+        const segmentEnd = (educationIndex + 1) / 6;
         const scrollRatioInSegment = (progress - segmentStart) / (segmentEnd - segmentStart);
 
         // Update parallax with normalized ratio (0-1)
@@ -107,6 +110,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, { passive: true });
 
-    // Initialize on load
-    updateProgress();
+    // Make progress points clickable
+    progressPoints.forEach((point, index) => {
+        point.style.cursor = 'pointer';
+        point.addEventListener('click', () => {
+            const containerRect = stickyContainer.getBoundingClientRect();
+            const scrollableDistance = containerRect.height - window.innerHeight;
+
+            // Calculate target progress (0 to 1)
+            const targetProgress = index / 6;
+
+            // Calculate target scroll position
+            const containerTop = stickyContainer.getBoundingClientRect().top + window.scrollY;
+            const targetScroll = containerTop + (targetProgress * scrollableDistance);
+
+            // Smooth scroll to target
+            window.scrollTo({
+                top: targetScroll,
+                behavior: 'smooth'
+            });
+        });
+    });
 });

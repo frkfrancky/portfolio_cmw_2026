@@ -1,27 +1,48 @@
-// Language system with data attributes
+// Language system using content.json
 let currentLanguage = "fr";
 
 // Initialize language based on navigator or default to 'fr'
-function initializeLanguage() {
-    const navigatorLang = navigator.language || navigator.userLanguage;
-    if (navigatorLang.startsWith("en")) {
-        currentLanguage = "en";
-    } else if (navigatorLang.startsWith("ko")) {
-        currentLanguage = "kr";
+async function initializeLanguage() {
+    // Check for saved language preference first
+    const savedLanguage = localStorage.getItem("preferredLanguage");
+    if (savedLanguage) {
+        currentLanguage = savedLanguage;
     } else {
-        currentLanguage = "fr";
+        // Then check navigator language
+        const navigatorLang = navigator.language || navigator.userLanguage;
+        if (navigatorLang.startsWith("en")) {
+            currentLanguage = "en";
+        } else if (navigatorLang.startsWith("ko")) {
+            currentLanguage = "kr";
+        } else {
+            currentLanguage = "fr";
+        }
+    }
+
+    // Wait for content loader to have data
+    if (!contentLoader.data) {
+        await contentLoader.load();
     }
 
     setLanguage(currentLanguage);
 }
 
-// Change language and update all elements with data attributes
+// Change language and update all elements from content.json
 function setLanguage(lang) {
     currentLanguage = lang;
 
-    // Update all elements with data-* attributes
-    document.querySelectorAll("[data-fr][data-en][data-kr]").forEach((el) => {
-        el.textContent = el.getAttribute(`data-${lang}`);
+    // Update contentLoader language
+    contentLoader.setLanguage(lang);
+
+    // Get labels from content.json
+    const labels = contentLoader.getLabels();
+
+    // Update elements with data-label attributes from content.json
+    document.querySelectorAll("[data-label]").forEach((el) => {
+        const labelKey = el.getAttribute("data-label");
+        if (labels[labelKey]) {
+            el.textContent = labels[labelKey];
+        }
     });
 
     // Update active button
@@ -59,32 +80,24 @@ function updateHelloSvgLanguage(lang) {
     }
 }
 
-// Event listeners for language buttons
-document.querySelector("#langue-fr").addEventListener("click", () => {
-    setLanguage("fr");
-});
-
-document.querySelector("#langue-en").addEventListener("click", () => {
-    setLanguage("en");
-});
-
-document.querySelector("#langue-kr").addEventListener("click", () => {
-    setLanguage("kr");
-});
-
-// Check for saved language preference
-const savedLanguage = localStorage.getItem("preferredLanguage");
-if (savedLanguage) {
-    currentLanguage = savedLanguage;
-}
-
 // Initialize on page load
-document.addEventListener("DOMContentLoaded", () => {
-    initializeLanguage();
-});
+document.addEventListener("DOMContentLoaded", async () => {
+    await initializeLanguage();
 
-// Theme toggle button
-document.addEventListener("DOMContentLoaded", () => {
+    // Event listeners for language buttons (attached after DOM is ready)
+    document.querySelector("#langue-fr").addEventListener("click", () => {
+        setLanguage("fr");
+    });
+
+    document.querySelector("#langue-en").addEventListener("click", () => {
+        setLanguage("en");
+    });
+
+    document.querySelector("#langue-kr").addEventListener("click", () => {
+        setLanguage("kr");
+    });
+
+    // Theme toggle button
     const themeBtn = document.getElementById("theme-toggle");
     if (themeBtn) {
         themeBtn.addEventListener("click", toggleTheme);
@@ -92,8 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Fallback initialization if DOM is already loaded
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initializeLanguage);
-} else {
+if (document.readyState !== "loading") {
     initializeLanguage();
 }

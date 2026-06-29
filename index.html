@@ -97,14 +97,14 @@
 
         <div class="textWrap2" id="textWrap2">
             <h1 class="name" id="name1">
-                <span class="hero-prenom" data-fr="FRANCKY" data-en="FRANCKY" data-kr="프랭키"></span>
+                <span class="hero-prenom" data-label="heroPrenom"></span>
             </h1>
-            <h2 class="surname" id="surname1" data-fr="RASATAHARISOA" data-en="RASATAHARISOA" data-kr="라사타하리소아"></h2>
+            <h2 class="surname" id="surname1" data-label="heroNom"></h2>
         </div>
 
         <div class="textWrap" id="textWrap">
             <h1 class="name" style="opacity: 0.3;" id="name2">
-                <span class="hero-prenom-bg" data-fr="FRANCKY" data-en="FRANCKY" data-kr="프랭키"></span>
+                <span class="hero-prenom-bg" data-label="heroPrenom"></span>
             </h1>
             <div class="bandenoire">
                 <div class="social-links">
@@ -124,7 +124,7 @@
                         </svg>
                     </a>
                 </div>
-                <h2 class="surname" id="surname2" data-fr="RASATAHARISOA" data-en="RASATAHARISOA" data-kr="라사타하리소아"></h2>
+                <h2 class="surname" id="surname2" data-label="heroNom"></h2>
             </div>
         </div>
     </section>
@@ -134,7 +134,7 @@
         <div id="silhouette-wrap" class="silhouette-wrap">
             <img src="assets/image/silouhette1.svg" alt="Silhouette" class="silhouette-img" />
         </div>
-        <h2 class="section-title" data-fr="Compétences" data-en="Skills" data-kr="기술"></h2>
+        <h2 class="section-title" data-label="sectionSkills"></h2>
         <div class="skills-grid">
             <div class="skill-card-grid"><div class="skill-text-base"></div><div class="skill-text-overlay"></div></div>
             <div class="skill-card-grid"><div class="skill-text-base"></div><div class="skill-text-overlay"></div></div>
@@ -156,7 +156,7 @@
     <div id="sticky-container">
         <!-- Academic & Professional Journey Section -->
         <section id="journey" class="section journey-section">
-        <h2 class="section-title" data-fr="Parcours académique" data-en="Academic Journey" data-kr="학문 여정"></h2>
+        <h2 class="section-title" data-label="sectionEducation"></h2>
 
         <div class="journey-container">
             <!-- Left side - Images with parallax layers -->
@@ -175,28 +175,33 @@
 
         <!-- Invisible education cards (data source for journey info) -->
         <div class="education-card" data-index="0" style="display: none;">
-            <h3 class="education-school" data-fr="Lycée Saint François Xavier Antanimena" data-en="Saint François Xavier Antanimena High School" data-kr="생프랑수아 자비에 안타니메나 고등학교"></h3>
-            <p class="education-degree" data-fr="Baccalauréat" data-en="Baccalaureate" data-kr="학위"></p>
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
             <p class="education-years">2017 - 2018</p>
         </div>
         <div class="education-card" data-index="1" style="display: none;">
-            <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
-            <p class="education-degree" data-fr="Licence Développement d'Application internet et intranet" data-en="Bachelor in Web and Intranet Application Development" data-kr="웹 및 인트라넷 응용 프로그램 개발 학사"></p>
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
             <p class="education-years">2019 - 2022</p>
         </div>
         <div class="education-card" data-index="2" style="display: none;">
-            <h3 class="education-school" data-fr="Université de Fianarantsoa" data-en="University of Fianarantsoa" data-kr="피아나란차 대학교"></h3>
-            <p class="education-degree" data-fr="Master en Modélisation et Ingénierie Informatique" data-en="Master in Modeling and Computer Engineering" data-kr="모델링 및 컴퓨터 공학 석사"></p>
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
             <p class="education-years">2022 - 2024</p>
         </div>
         <div class="education-card" data-index="3" style="display: none;">
-            <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
-            <p class="education-degree" data-fr="Master 2 en Système Intelligent et Applications" data-en="Master 2 in Intelligent Systems and Applications" data-kr="지능형 시스템 및 응용 프로그램 석사 2학년"></p>
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
             <p class="education-years">2024 - 2025</p>
         </div>
         <div class="education-card" data-index="4" style="display: none;">
-            <h3 class="education-school" data-fr="Université Gustave Eiffel" data-en="Gustave Eiffel University" data-kr="구스타브 에펠 대학교"></h3>
-            <p class="education-degree" data-fr="Master 2 en CMW" data-en="Master 2 in CMW" data-kr="CMW 석사 2학년"></p>
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
+            <p class="education-years">2025 - 2026</p>
+        </div>
+        <div class="education-card" data-index="5" style="display: none;">
+            <h3 class="education-school"></h3>
+            <p class="education-degree"></p>
             <p class="education-years">2025 - 2026</p>
         </div>
 
@@ -204,12 +209,13 @@
         <div class="progress-bar-container">
             <div class="progress-track"></div>
 
-            <!-- 5 progress points for each education level (leaving space for 6th point at end) -->
+            <!-- 6 progress points for each education level -->
             <div class="progress-point" style="left: 0%;"></div>
-            <div class="progress-point" style="left: 20%;"></div>
-            <div class="progress-point" style="left: 40%;"></div>
-            <div class="progress-point" style="left: 60%;"></div>
-            <div class="progress-point" style="left: 80%;"></div>
+            <div class="progress-point" style="left: 16.67%;"></div>
+            <div class="progress-point" style="left: 33.33%;"></div>
+            <div class="progress-point" style="left: 50%;"></div>
+            <div class="progress-point" style="left: 66.67%;"></div>
+            <div class="progress-point" style="left: 83.33%;"></div>
 
             <!-- Moving SVG indicator -->
             <div class="progress-image" id="progress-image">
@@ -237,19 +243,24 @@
 
     <!-- Projects Section -->
     <section id="projects" class="section projects-section">
-        <h2 class="section-title" data-fr="Projets" data-en="Projects" data-kr="프로젝트"></h2>
-        <div class="projects-container">
-            <div class="project-card" data-fr="Projet 1" data-en="Project 1" data-kr="프로젝트 1"></div>
-            <div class="project-card" data-fr="Projet 2" data-en="Project 2" data-kr="프로젝트 2"></div>
-            <div class="project-card" data-fr="Projet 3" data-en="Project 3" data-kr="프로젝트 3"></div>
+        <h2 class="section-title" data-label="sectionProjects"></h2>
+        <div id="projects-gallery"></div>
+        <div class="projects-buttons">
+            <button id="projects-see-more" onclick="showAllProjects()" class="btn-projects">Voir plus</button>
+            <button id="projects-see-less" onclick="showLessProjects()" class="btn-projects">Voir moins</button>
         </div>
     </section>
 
+    <!-- Project Modal -->
+    <div id="project-modal">
+        <div id="project-modal-content"></div>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact" class="section contact-section">
-        <h2 class="section-title" data-fr="Me contacter" data-en="Contact Me" data-kr="연락처"></h2>
+        <h2 class="section-title" data-label="sectionContact"></h2>
         <div class="contact-content">
-            <p class="contact-text" data-fr="Vous pouvez me contacter via:" data-en="You can reach me at:" data-kr="다음을 통해 저에게 연락할 수 있습니다:"></p>
+            <p class="contact-text" data-label="contactText"></p>
         </div>
     </section>
 
@@ -261,5 +272,6 @@
     <script src="assets/js/content-loader.js"></script>
     <script src="assets/js/journey-parallax.js"></script>
     <script src="assets/js/journey.js"></script>
+    <script src="assets/js/projects.js"></script>
 </body>
 </html>

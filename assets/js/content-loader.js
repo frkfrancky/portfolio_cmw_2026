@@ -45,6 +45,10 @@ class ContentLoader {
     getContact() {
         return this.getContent('contact');
     }
+
+    getLabels() {
+        return this.getContent('labels') || {};
+    }
 }
 
 // Initialize content loader

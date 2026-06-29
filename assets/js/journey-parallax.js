@@ -3,7 +3,7 @@ class JourneyParallax {
     constructor() {
         this.currentIndex = -1;
         this.currentSVG = null;
-        this.educationCount = 5; // Number of education levels
+        this.educationCount = 6; // Number of education levels
         this.imageContainer = document.getElementById('journey-images');
     }
 
@@ -16,7 +16,17 @@ class JourneyParallax {
 
         try {
             const response = await fetch(svgPath);
-            const svgText = await response.text();
+            let svgText = await response.text();
+
+            // Fix relative image paths BEFORE injecting into DOM
+            // Replace xlink:href="filename.png" with xlink:href="assets/image/filename.png"
+            svgText = svgText.replace(/xlink:href="([^"]+)"/g, (match, href) => {
+                if (!href.startsWith('./') && !href.startsWith('/') && !href.startsWith('data:')) {
+                    return `xlink:href="assets/image/${href}"`;
+                }
+                return match;
+            });
+
             this.imageContainer.innerHTML = svgText;
             this.currentSVG = this.imageContainer.querySelector('svg');
 

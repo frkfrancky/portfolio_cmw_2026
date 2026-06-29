@@ -1,15 +1,29 @@
-// Skills data by category
-const skillsData = {
-    "Compétences": ["UI/UX Design", "Front-end", "Back-end", "IA", "Géomatique", "Base de données", "Game Development", "Production musicale", "Art numérique", "Dessin", "Montage vidéo"]
-};
+// Load skills from content.json and update on language change
+let allSkills = [];
+let skillsInterval = null;
+let displayedSkills = new Set();
 
-// Flatten all skills into a single array
-const allSkills = Object.values(skillsData).flat();
+async function loadSkills() {
+    // Wait for contentLoader to have data
+    if (!contentLoader.data) {
+        await contentLoader.load();
+    }
+
+    // Get skills from content.json based on current language
+    allSkills = contentLoader.getSkills() || [];
+
+    // Reset displayed skills when language changes
+    displayedSkills.clear();
+
+    // Reinitialize skill cards with new language
+    initSkillsCards();
+}
 
 // Initialize skill cards
 function initSkillsCards() {
     const cards = document.querySelectorAll(".skill-card-grid:not(.skill-card-extra)");
-    const displayedSkills = new Set();
+
+    if (allSkills.length === 0) return;
 
     // Function to get a random skill not currently displayed
     function getRandomUniqueSkill() {
@@ -39,8 +53,11 @@ function initSkillsCards() {
         }
     });
 
+    // Clear previous interval if it exists
+    if (skillsInterval) clearInterval(skillsInterval);
+
     // Change one random card every 0.5 seconds
-    setInterval(() => {
+    skillsInterval = setInterval(() => {
         const randomCard = cards[Math.floor(Math.random() * cards.length)];
 
         // Remove old skill from displayed set
@@ -79,8 +96,20 @@ function initSkillsCards() {
 }
 
 // Initialize on page load
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initSkillsCards);
-} else {
-    initSkillsCards();
+document.addEventListener("DOMContentLoaded", () => {
+    loadSkills();
+
+    // Update skills when language changes
+    // Listen for language change by watching for changes in contentLoader
+    const originalSetLanguage = window.setLanguage;
+    window.setLanguage = function(lang) {
+        originalSetLanguage.call(this, lang);
+        contentLoader.setLanguage(lang);
+        loadSkills();
+    };
+});
+
+// Fallback initialization if DOM is already loaded
+if (document.readyState !== "loading") {
+    loadSkills();
 }
