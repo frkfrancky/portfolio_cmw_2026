@@ -123,6 +123,11 @@
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.645.069-4.849.069-3.203 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12c0-3.403 2.759-6.162 6.162-6.162 3.403 0 6.162 2.759 6.162 6.162 0 3.403-2.759 6.162-6.162 6.162-3.403 0-6.162-2.759-6.162-6.162zm3 0c0 1.734 1.428 3.162 3.162 3.162 1.734 0 3.162-1.428 3.162-3.162 0-1.734-1.428-3.162-3.162-3.162-1.734 0-3.162 1.428-3.162 3.162zm9.932-7.5c0 .795.645 1.44 1.44 1.44.795 0 1.44-.645 1.44-1.44 0-.795-.645-1.44-1.44-1.44-.795 0-1.44.645-1.44 1.44z"/>
                         </svg>
                     </a>
+                    <a href="assets/data/cv.pdf" download="CV_Francky_Rasataharisoa.pdf" class="social-icon" title="Télécharger mon CV">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                    </a>
                 </div>
                 <h2 class="surname" id="surname2" data-label="heroNom"></h2>
             </div>
@@ -245,16 +250,39 @@
 <!-- Projects Section -->
     <section id="projects" class="section projects-section">
         <h2 class="section-title" data-label="sectionProjects"></h2>
-        <div id="projects-gallery"></div>
-        <div class="projects-buttons">
-            <button id="projects-see-more" onclick="showAllProjects()" class="btn-projects">Voir plus</button>
-            <button id="projects-see-less" onclick="showLessProjects()" class="btn-projects">Voir moins</button>
+        <div class="projects-carousel">
+            <button id="projects-prev" class="projects-nav-btn projects-nav-prev" aria-label="Projet précédent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div id="projects-gallery"></div>
+            <button id="projects-next" class="projects-nav-btn projects-nav-next" aria-label="Projet suivant">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+        </div>
+        <div id="projects-dots" class="projects-dots"></div>
+
+        <p class="projects-trust-text" data-label="projectsTrust"></p>
+
+        <!-- Black banner with scrolling partner/company logos (populated from content.json's "partners" list by partners.js) -->
+        <div class="bandenoire-projects">
+            <div id="logos-track" class="logos-track"></div>
         </div>
     </section>
 
     <!-- Project Modal -->
     <div id="project-modal">
         <div id="project-modal-content"></div>
+    </div>
+
+    <!-- Awards & Distinctions Section -->
+    <section id="awards" class="section awards-section">
+        <h2 class="section-title" data-label="sectionAwards"></h2>
+        <div id="awards-wall" class="awards-wall"></div>
+    </section>
+
+    <!-- Award Modal -->
+    <div id="award-modal">
+        <div id="award-modal-content"></div>
     </div>
 
     <!-- Contact Section -->
@@ -337,5 +365,7 @@
     <script src="assets/js/journey-parallax.js"></script>
     <script src="assets/js/journey.js"></script>
     <script src="assets/js/projects.js"></script>
+    <script src="assets/js/partners.js"></script>
+    <script src="assets/js/awards.js"></script>
 </body>
 </html>

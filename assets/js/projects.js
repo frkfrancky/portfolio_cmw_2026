@@ -1,7 +1,40 @@
-// Projects Gallery and Modal Management
-let currentProjects = [];
+// Projects Carousel (card fan) and Modal Management
 let allProjects = [];
-let showingAll = false;
+let fanIndex = -1; // -1 = not yet initialized; set to the middle project on first load
+let fanOpenness = 0; // 0 = closed flat stack, 1 = fully fanned out (driven by scroll position)
+
+const FAN_MAX_VISIBLE = 4;      // cards shown on each side of the active one
+const DRAG_CLICK_THRESHOLD = 6; // px of movement before a press counts as a drag
+const FAN_STEP_RATIO = 0.34;    // card-width fraction used as the spacing between two fan positions
+
+// How many card-widths wide a step is, based on the currently rendered card size
+function getFanStepPx() {
+    const card = document.querySelector('#projects-gallery .project-card');
+    const cardWidth = card ? card.getBoundingClientRect().width : 300;
+    return cardWidth * FAN_STEP_RATIO;
+}
+
+// How "open" the fan should be, based on how close the Projects section is to the
+// center of the viewport: cards fan out as it scrolls into focus, and collapse back
+// into a flat stack as it scrolls away (entering from below or leaving above) — an
+// appear/disappear animation shaped around the card stack itself rather than a plain
+// fade or translation.
+function updateFanOpenness() {
+    const section = document.getElementById('projects');
+    if (!section) return;
+
+    const rect = section.getBoundingClientRect();
+    const viewportCenter = window.innerHeight / 2;
+    const sectionCenter = rect.top + rect.height / 2;
+    const maxDistance = (window.innerHeight + rect.height) / 2;
+
+    let progress = maxDistance > 0 ? 1 - Math.abs(sectionCenter - viewportCenter) / maxDistance : 1;
+    progress = Math.max(0, Math.min(1, progress));
+
+    // Ease (smoothstep) for a more natural open/close feel than a linear ramp.
+    fanOpenness = progress * progress * (3 - 2 * progress);
+    layoutFanCards(0);
+}
 
 // Load and display projects
 async function loadProjects() {
@@ -14,27 +47,28 @@ async function loadProjects() {
     const projects = contentLoader.getContent('projects') || [];
     const projectsMore = contentLoader.getContent('projectsMore') || [];
 
-    currentProjects = projects;
     allProjects = [...projects, ...projectsMore];
-    showingAll = false;
 
-    // Display initial projects
-    displayProjectsGallery(currentProjects);
+    // Display all projects in the carousel
+    displayProjectsGallery(allProjects);
 }
 
-// Display projects in gallery
+// Display projects in the fan carousel
 function displayProjectsGallery(projects) {
     const gallery = document.getElementById('projects-gallery');
+    const dotsContainer = document.getElementById('projects-dots');
     if (!gallery) return;
 
     gallery.innerHTML = '';
+    if (dotsContainer) dotsContainer.innerHTML = '';
 
-    projects.forEach(project => {
+    projects.forEach((project, i) => {
         const projectCard = document.createElement('div');
-        projectCard.className = 'project-card visible'; // Add visible class immediately
+        projectCard.className = 'project-card';
+        projectCard.dataset.index = String(i);
         projectCard.innerHTML = `
             <div class="project-image-container">
-                <img src="${project.image}" alt="${project.title}" class="project-image">
+                <img src="${project.image}" alt="${project.title}" class="project-image" draggable="false">
                 <div class="project-overlay">
                     <span class="project-view-more">Voir plus</span>
                 </div>
@@ -44,29 +78,179 @@ function displayProjectsGallery(projects) {
                 <p class="project-theme">${project.theme}</p>
             </div>
         `;
-
-        projectCard.addEventListener('click', () => openProjectModal(project));
         gallery.appendChild(projectCard);
+
+        if (dotsContainer) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'projects-dot';
+            dot.setAttribute('aria-label', `Aller au projet ${i + 1}`);
+            dot.addEventListener('click', () => goToProject(i));
+            dotsContainer.appendChild(dot);
+        }
     });
 
-    // Show/hide buttons
-    updateProjectsButtons();
+    // Center on the middle project the first time the carousel loads; keep the
+    // current position across later re-renders (e.g. a language change).
+    fanIndex = fanIndex === -1
+        ? Math.floor(projects.length / 2)
+        : ((fanIndex % projects.length) + projects.length) % projects.length;
+
+    layoutFanCards(0);
 }
 
-// Update project buttons visibility
-function updateProjectsButtons() {
-    const seeMoreBtn = document.getElementById('projects-see-more');
-    const seeLessBtn = document.getElementById('projects-see-less');
+// Position every card in the fan based on its (possibly fractional) distance from the
+// active index. `dragOffset` is a continuous number of fan-steps (not pixels): while
+// dragging, each card keeps rotating/curving along its own fan path instead of the
+// whole stack sliding sideways as a block. The carousel loops: a card's distance from
+// the center always takes the shortest path around the loop, so there is no first or
+// last card to get stuck against.
+function layoutFanCards(dragOffset = 0) {
+    const gallery = document.getElementById('projects-gallery');
+    if (!gallery) return;
 
-    if (!seeMoreBtn || !seeLessBtn) return;
+    const cards = gallery.querySelectorAll('.project-card');
+    const total = cards.length;
+    if (total === 0) return;
 
-    if (showingAll) {
-        seeMoreBtn.style.display = 'none';
-        seeLessBtn.style.display = 'block';
-    } else {
-        seeMoreBtn.style.display = allProjects.length > currentProjects.length ? 'block' : 'none';
-        seeLessBtn.style.display = 'none';
+    const cardWidth = cards[0].getBoundingClientRect().width || 300;
+    const xStep = cardWidth * FAN_STEP_RATIO;
+    const angleStep = 9; // degrees per fan-step away from center
+    const yCurve = cardWidth * 0.05;
+    const scaleStep = 0.07;
+
+    cards.forEach((card, i) => {
+        let offset = (i - fanIndex) - dragOffset;
+        // Wrap to the shortest signed distance around the loop (e.g. with 12 cards,
+        // an offset of 7 becomes -5: it's closer going the other way around).
+        offset -= total * Math.round(offset / total);
+        const abs = Math.abs(offset);
+        const rotate = offset * angleStep * fanOpenness;
+        const translateX = offset * xStep * fanOpenness;
+        const focusLift = Math.max(0, 1 - abs) * cardWidth * 0.04 * fanOpenness; // smoothly pops up near center
+        const translateY = (Math.pow(abs, 1.3) * yCurve * fanOpenness) - focusLift;
+        const scale = Math.max(1 - abs * scaleStep * fanOpenness, 0.72);
+        const visible = abs <= FAN_MAX_VISIBLE;
+        const opacity = !visible ? 0 : (abs >= FAN_MAX_VISIBLE ? 0.25 : 1);
+
+        card.style.transform =
+            `translate(-50%, -50%) translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+        card.style.zIndex = String(Math.round(200 - abs));
+        card.style.opacity = String(opacity);
+        card.style.pointerEvents = visible ? 'auto' : 'none';
+        card.classList.toggle('is-active', abs < 0.5);
+    });
+
+    updateProjectsDotsAndNav();
+}
+
+// Sync dot indicators with the active index (no arrow disabled state: the carousel loops)
+function updateProjectsDotsAndNav() {
+    const dotsContainer = document.getElementById('projects-dots');
+
+    if (dotsContainer) {
+        dotsContainer.querySelectorAll('.projects-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === fanIndex);
+        });
     }
+}
+
+// Move the active card to a given index, animated via the card's CSS transition.
+// The index wraps around in both directions, so there is no first or last card.
+function goToProject(index) {
+    const gallery = document.getElementById('projects-gallery');
+    const total = gallery ? gallery.querySelectorAll('.project-card').length : 0;
+    if (total === 0) return;
+
+    fanIndex = ((index % total) + total) % total;
+    layoutFanCards(0);
+}
+
+// Wire up drag-to-slide and the prev/next arrows (persistent elements, set up once)
+function initProjectsCarousel() {
+    const gallery = document.getElementById('projects-gallery');
+    const prevBtn = document.getElementById('projects-prev');
+    const nextBtn = document.getElementById('projects-next');
+    if (!gallery) return;
+
+    let pointerId = null;
+    let startX = 0;
+    let lastDeltaX = 0;
+    let isDragging = false;
+    let pressedCard = null;
+
+    function onPointerMove(e) {
+        if (e.pointerId !== pointerId) return;
+        const deltaX = e.clientX - startX;
+
+        if (!isDragging && Math.abs(deltaX) > DRAG_CLICK_THRESHOLD) {
+            isDragging = true;
+            gallery.classList.add('is-dragging');
+        }
+
+        if (isDragging) {
+            lastDeltaX = deltaX;
+            // Dragging left (negative delta) rotates the fan towards the next cards,
+            // so the whole fan turns continuously instead of sliding as a flat block.
+            layoutFanCards(-deltaX / getFanStepPx());
+        }
+    }
+
+    function onPointerUp(e) {
+        if (e.pointerId !== pointerId) return;
+
+        gallery.removeEventListener('pointermove', onPointerMove);
+        gallery.removeEventListener('pointerup', onPointerUp);
+        gallery.removeEventListener('pointercancel', onPointerUp);
+        try { gallery.releasePointerCapture(pointerId); } catch (err) { /* noop */ }
+        gallery.classList.remove('is-dragging');
+
+        if (isDragging) {
+            const stepPx = getFanStepPx();
+
+            // Snap to the nearest card: round the fan rotation to the closest whole step.
+            let steps = Math.round(-lastDeltaX / stepPx);
+            if (steps === 0 && Math.abs(lastDeltaX) > DRAG_CLICK_THRESHOLD) {
+                steps = lastDeltaX < 0 ? 1 : -1;
+            }
+
+            goToProject(fanIndex + steps);
+        } else if (pressedCard) {
+            const index = Number(pressedCard.dataset.index);
+            if (index === fanIndex) {
+                openProjectModal(allProjects[index]);
+            } else {
+                goToProject(index);
+            }
+        }
+
+        pointerId = null;
+        isDragging = false;
+        lastDeltaX = 0;
+        pressedCard = null;
+    }
+
+    gallery.addEventListener('pointerdown', (e) => {
+        pressedCard = e.target.closest('.project-card');
+        if (!pressedCard) return;
+
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        lastDeltaX = 0;
+        isDragging = false;
+
+        try { gallery.setPointerCapture(pointerId); } catch (err) { /* noop */ }
+        gallery.addEventListener('pointermove', onPointerMove);
+        gallery.addEventListener('pointerup', onPointerUp);
+        gallery.addEventListener('pointercancel', onPointerUp);
+    });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goToProject(fanIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToProject(fanIndex + 1));
+
+    window.addEventListener('scroll', updateFanOpenness, { passive: true });
+    window.addEventListener('resize', updateFanOpenness);
+    updateFanOpenness();
 }
 
 // Open project modal (fullscreen)
@@ -126,7 +310,7 @@ function openProjectModal(project) {
         </div>
     `;
 
-    modal.style.display = 'flex';
+    modal.classList.add('is-open');
     document.body.style.overflow = 'hidden'; // Prevent scrolling
 }
 
@@ -134,7 +318,7 @@ function openProjectModal(project) {
 function closeProjectModal() {
     const modal = document.getElementById('project-modal');
     if (modal) {
-        modal.style.display = 'none';
+        modal.classList.remove('is-open');
         document.body.style.overflow = 'auto'; // Re-enable scrolling
     }
 }
@@ -146,22 +330,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Show all projects
-function showAllProjects() {
-    displayProjectsGallery(allProjects);
-    showingAll = true;
-    updateProjectsButtons();
-}
-
-// Show less projects (back to 3)
-function showLessProjects() {
-    displayProjectsGallery(currentProjects);
-    showingAll = false;
-    updateProjectsButtons();
-}
-
 // Update projects when language changes
 document.addEventListener('DOMContentLoaded', () => {
+    initProjectsCarousel();
     loadProjects();
 
     // Update projects when language changes
@@ -175,5 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fallback initialization
 if (document.readyState !== "loading") {
+    initProjectsCarousel();
     loadProjects();
 }

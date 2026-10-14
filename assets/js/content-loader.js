@@ -46,8 +46,19 @@ class ContentLoader {
         return this.getContent('contact');
     }
 
+    getAwards() {
+        return this.getContent('awards') || [];
+    }
+
     getLabels() {
         return this.getContent('labels') || {};
+    }
+
+    // Partners/logos are language-independent, stored at the root of content.json
+    // (not under fr/en/kr), so this reads this.data directly instead of going
+    // through getContent(), which is scoped to the current language.
+    getPartners() {
+        return this.data?.partners || [];
     }
 }
 

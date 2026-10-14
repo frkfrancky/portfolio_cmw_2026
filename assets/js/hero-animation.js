@@ -45,9 +45,25 @@ window.addEventListener('scroll', () => {
         surname2.style.transform = `translateX(${scrollPercentage * 12 * intensity * sensitivityMultiplier}px)`;
     }
 
-    // Silhouette image - less sensitive to scroll
+    // Silhouette image - driven by its own section's position in the viewport,
+    // not the whole-page scroll percentage, so it never drifts out of sync
+    // depending on how long the rest of the page is (e.g. journey hidden or not).
+    // Progress goes from 0 (section just entering the bottom of the screen - neutral
+    // position, not pre-shifted) to 1 (section has fully scrolled past, i.e. its
+    // bottom edge has reached the top of the screen). The wrap spans the section's
+    // full height, so using the section's whole pass-through here (rather than just
+    // one viewport height) keeps the image moving for as long as it stays on screen,
+    // instead of freezing partway through a tall section.
     const silhouetteWrap = document.getElementById('silhouette-wrap');
-    if (silhouetteWrap) {
-        silhouetteWrap.style.transform = `translateY(${scrollPercentage * 10 * intensity * sensitivityMultiplier}px)`;
+    const skillsSection = document.getElementById('skills');
+    if (silhouetteWrap && skillsSection) {
+        const rect = skillsSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const total = rect.height + viewportHeight;
+        let sectionProgress = total > 0 ? (viewportHeight - rect.top) / total : 0;
+        sectionProgress = Math.max(0, Math.min(1, sectionProgress));
+
+        const SILHOUETTE_RANGE_PX = 200; // total travel distance across the section's full pass through view
+        silhouetteWrap.style.transform = `translateY(${sectionProgress * SILHOUETTE_RANGE_PX}px)`;
     }
 });
