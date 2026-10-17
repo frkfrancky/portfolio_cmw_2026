@@ -1182,6 +1182,317 @@ body.dark .ac1-shape {
     }
 }
 
+/* ===== EDUCATION SECTION (single comic panel board, Prev/Next only) =====
+   One board stays on screen; only its content changes. No scroll-driven
+   interaction at all - navigation is entirely through the prev/next buttons,
+   so the page's vertical scroll is never intercepted. */
+.education-section {
+    flex-direction: column;
+    background-image: radial-gradient(circle, rgba(150, 150, 150, 0.18) 1.5px, transparent 1.5px);
+    background-size: 40px 40px;
+}
+
+body.dark .education-section {
+    background-image:
+        radial-gradient(circle, rgba(200, 200, 200, 0.2) 1.5px, transparent 1.5px),
+        linear-gradient(180deg, #0a0a0e 0%, #404048 100%);
+    background-size: 40px 40px, 100% 100%;
+}
+
+.comic-board-area {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.education-nav-btn {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-violet);
+    background: var(--primary-violet);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+    transition: all 0.3s;
+}
+
+.education-nav-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.education-nav-btn:hover {
+    background: var(--primary-violet-light);
+    border-color: var(--primary-violet-light);
+    transform: scale(1.08);
+}
+
+.education-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: none;
+}
+
+/* Comic board shapes are traced exactly from assets/image/education-shape.svg
+   (776.7 x 466.8 viewBox, groups "image"/"parcours"/"ecole"/"annee"/"pays").
+   Each panel is positioned at its shape's bounding box (as % of the board) and
+   clipped to the shape's outline re-normalized within that box. No border/ink
+   outline on the panels themselves - just the flat colored shapes. */
+.comic-board-wrapper {
+    position: relative;
+    width: min(850px, 82vw);
+    aspect-ratio: 776.7 / 466.8;
+    margin: 10px 0 30px;
+    /* Makes the panel text below scale in "cqw" units - % of this wrapper's
+       own width - so font sizes track the shapes continuously as the board
+       resizes, instead of only jumping at a single mobile breakpoint. */
+    container-type: inline-size;
+    container-name: comic-board;
+}
+
+.comic-board {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.comic-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Starts "shattered" off its final spot; education.js reassembles the
+       pieces progressively as the section scrolls into view, using the same
+       IntersectionObserver + scroll-progress technique as the hero text. */
+    opacity: 0;
+}
+
+.comic-panel-image {
+    left: 1.04%;
+    top: 1.61%;
+    width: 57.67%;
+    height: 74.85%;
+    clip-path: polygon(100% 24.33%, 91.87% 87.69%, 0 100%, 0 0, 50.79% 0, 55.24% 24.33%);
+    background: var(--bg-primary);
+    --frag-x: -150px;
+    --frag-y: -100px;
+    transform: translate(var(--frag-x), var(--frag-y));
+}
+
+.comic-panel-image svg {
+    pointer-events: none;
+}
+
+.comic-panel-title {
+    left: 31.53%;
+    top: 1.61%;
+    width: 36.94%;
+    height: 16.58%;
+    clip-path: polygon(93.73% 100%, 6.27% 100%, 0 0, 100% 0);
+    background: var(--bg-primary);
+    padding: 6px 14px;
+    --frag-x: 0px;
+    --frag-y: -130px;
+    transform: translate(var(--frag-x), var(--frag-y));
+}
+
+.comic-panel-title .section-title {
+    font-family: 'Impact', sans-serif;
+    font-size: 2.8cqw;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    text-align: center;
+    opacity: 1;
+    transform: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comic-panel-info {
+    left: 55.72%;
+    top: 1.61%;
+    width: 43.29%;
+    height: 59.38%;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%, 9.34% 30.66%, 26.17% 30.66%, 32.18% 0);
+    background: var(--primary-violet);
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    padding-left: 15%;
+    --frag-x: 150px;
+    --frag-y: -55px;
+    transform: translate(var(--frag-x), var(--frag-y));
+}
+
+.comic-panel-info h3 {
+    font-family: 'Impact', sans-serif;
+    font-size: 2.6cqw;
+    letter-spacing: 0.5px;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 0.4em;
+}
+
+.comic-panel-info p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8cqw;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.comic-panel-year {
+    left: 1.04%;
+    top: 69.39%;
+    width: 52.45%;
+    height: 29.26%;
+    clip-path: polygon(93.86% 100%, 0 100%, 0 31.48%, 100% 0);
+    background: var(--text-dark);
+    padding-right: 10%;
+    padding-top: 4%;
+    --frag-x: -120px;
+    --frag-y: 120px;
+    transform: translate(var(--frag-x), var(--frag-y));
+}
+
+.comic-panel-year span {
+    display: inline-block;
+    font-family: 'Impact', sans-serif;
+    font-size: 7.5cqw;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+    /* Pivot pinned at the bottom-left corner: that corner never moves.
+       rotateX pushes the top edge back (away from the viewer), rotateY
+       pushes the right edge back - each alone only shifts the adjacent
+       corner (top-left, bottom-right) a little, but top-right gets both
+       combined, so it recedes the most while the other 3 corners stay
+       close to normal. */
+    transform-origin: left bottom;
+    transform: perspective(470px) rotateX(0deg) rotateY(-30deg);
+}
+
+.comic-panel-country {
+    left: 51.69%;
+    top: 62.96%;
+    width: 47.32%;
+    height: 35.69%;
+    clip-path: polygon(100% 0, 8.57% 0, 0 100%, 100% 100%);
+    background: var(--primary-lime);
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 6%;
+    --frag-x: 120px;
+    --frag-y: 120px;
+    transform: translate(var(--frag-x), var(--frag-y));
+}
+
+.comic-panel-flag {
+    font-size: 3cqw;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.comic-panel-country span:last-child {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.7cqw;
+    color: var(--text-dark);
+    text-align: center;
+    padding: 0 8px;
+}
+
+/* ===== EDUCATION RESPONSIVE =====
+   The board itself scales uniformly at any width via aspect-ratio, since every
+   panel is positioned/clipped in percentages. Only the fixed-size text and
+   padding need to shrink on narrower screens so they don't get cramped. */
+@media (max-width: 768px) {
+    .education-section {
+        min-height: auto;
+    }
+
+    .comic-board-area {
+        gap: 8px;
+    }
+
+    .education-nav-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .education-nav-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .comic-panel-info {
+        padding: 10px;
+        padding-left: 14%;
+    }
+
+    /* Mobile-specific layout, traced from assets/image/education-shape-mobile.svg
+       (401.5 x 636.1 viewBox, portrait) the same way as the desktop board -
+       shape, position and clip-path per panel, read straight from that
+       file's groups/coordinates. */
+    .comic-board-wrapper {
+        aspect-ratio: 401.5 / 636.1;
+    }
+
+    .comic-panel-image {
+        left: 2.02%;
+        top: 1.18%;
+        width: 96.29%;
+        height: 51.23%;
+        clip-path: polygon(100% 26.08%, 99.79% 86.81%, 0 100%, 0 0, 31.43% 0, 36.6% 26.08%);
+    }
+
+    .comic-panel-title {
+        left: 34.5%;
+        top: 1.18%;
+        width: 63.81%;
+        height: 12.17%;
+        clip-path: polygon(100% 100%, 7.03% 100%, 0 0, 100% 0);
+    }
+
+    .comic-panel-info {
+        left: 1.89%;
+        top: 65.02%;
+        width: 96.16%;
+        height: 33.94%;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 38.95%, 0 0, 29.5% 0);
+    }
+
+    .comic-panel-year {
+        left: 2.02%;
+        top: 50.51%;
+        width: 46.7%;
+        height: 13.17%;
+        clip-path: polygon(99.95% 100%, 0 100%, 0 23.63%, 100% 0);
+    }
+
+    .comic-panel-country {
+        left: 50.81%;
+        top: 47.07%;
+        width: 47.25%;
+        height: 16.62%;
+        clip-path: polygon(100% 0, 0.05% 21.19%, 0 100%, 100% 100%);
+    }
+}
+
 /* ===== PROJECTS SECTION ===== */
 .projects-section {
     flex-direction: column;

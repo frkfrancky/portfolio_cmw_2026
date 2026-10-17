@@ -247,6 +247,45 @@
         <div id="spacer" style="height: 10000px; margin-top: -100vh; z-index: 1;"></div>
     </div>
 
+    <!-- Academic Journey - single Comic Panel Board, navigated with Prev/Next
+         buttons only (no scroll-driven interaction) -->
+    <section id="education" class="section education-section">
+        <div class="comic-board-area">
+            <button id="education-prev" class="education-nav-btn education-nav-prev" aria-label="Formation précédente">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+
+            <div class="comic-board-wrapper">
+                <div class="comic-board" id="comic-board">
+                    <!-- Image panel: SVG with parallax layers, loaded/animated by education-parallax.js -->
+                    <div class="comic-panel comic-panel-image" id="education-images"></div>
+
+                    <div class="comic-panel comic-panel-title">
+                        <h2 class="section-title" data-label="sectionEducation"></h2>
+                    </div>
+
+                    <div class="comic-panel comic-panel-info">
+                        <h3 id="education-school"></h3>
+                        <p id="education-degree"></p>
+                    </div>
+
+                    <div class="comic-panel comic-panel-year">
+                        <span id="education-year"></span>
+                    </div>
+
+                    <div class="comic-panel comic-panel-country">
+                        <span class="comic-panel-flag" id="education-flag"></span>
+                        <span id="education-country"></span>
+                    </div>
+                </div>
+            </div>
+
+            <button id="education-next" class="education-nav-btn education-nav-next" aria-label="Formation suivante">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+        </div>
+    </section>
+
 <!-- Projects Section -->
     <section id="projects" class="section projects-section">
         <h2 class="section-title" data-label="sectionProjects"></h2>
@@ -364,6 +403,8 @@
     <script src="assets/js/skills.js"></script>
     <script src="assets/js/journey-parallax.js"></script>
     <script src="assets/js/journey.js"></script>
+    <script src="assets/js/education-parallax.js"></script>
+    <script src="assets/js/education.js"></script>
     <script src="assets/js/projects.js"></script>
     <script src="assets/js/partners.js"></script>
     <script src="assets/js/awards.js"></script>

@@ -21,37 +21,49 @@
                 "index": 0,
                 "school": "Lycée Saint François Xavier Antanimena",
                 "degree": "Baccalauréat",
-                "years": "2017 - 2018"
+                "years": "2017 - 2018",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 1,
                 "school": "Université de Fianarantsoa",
                 "degree": "Licence Développement d'Application internet et intranet",
-                "years": "2019 - 2022"
+                "years": "2019 - 2022",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 2,
                 "school": "Université de Fianarantsoa",
                 "degree": "Master en Modélisation et Ingénierie Informatique",
-                "years": "2022 - 2024"
+                "years": "2022 - 2024",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 3,
                 "school": "Université Gustave Eiffel",
                 "degree": "Master 2 en Système Intelligent et Applications",
-                "years": "2024 - 2025"
+                "years": "2024 - 2025",
+                "country": "France",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 4,
                 "school": "Université Gustave Eiffel",
                 "degree": "Master 2 en CMW",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "France",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 5,
                 "school": "Université Dong Eui",
                 "degree": "Séjour d'étude",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "Corée du Sud",
+                "countryFlag": "🇰🇷"
             }
         ],
         "skills": [
@@ -257,37 +269,49 @@
                 "index": 0,
                 "school": "Saint François Xavier Antanimena High School",
                 "degree": "Baccalaureate",
-                "years": "2017 - 2018"
+                "years": "2017 - 2018",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 1,
                 "school": "University of Fianarantsoa",
                 "degree": "Bachelor in Web and Intranet Application Development",
-                "years": "2019 - 2022"
+                "years": "2019 - 2022",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 2,
                 "school": "University of Fianarantsoa",
                 "degree": "Master in Modeling and Computer Engineering",
-                "years": "2022 - 2024"
+                "years": "2022 - 2024",
+                "country": "Madagascar",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 3,
                 "school": "Gustave Eiffel University",
                 "degree": "Master 2 in Intelligent Systems and Applications",
-                "years": "2024 - 2025"
+                "years": "2024 - 2025",
+                "country": "France",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 4,
                 "school": "Gustave Eiffel ",
                 "degree": "Master 2 in CMW",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "France",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 5,
                 "school": "Dong Eui University",
                 "degree": "Study trip",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "South Korea",
+                "countryFlag": "🇰🇷"
             }
         ],
         "skills": [
@@ -493,37 +517,49 @@
                 "index": 0,
                 "school": "생프랑수아 자비에 안타니메나 고등학교",
                 "degree": "학위",
-                "years": "2017 - 2018"
+                "years": "2017 - 2018",
+                "country": "마다가스카르",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 1,
                 "school": "피아나란차 대학교",
                 "degree": "웹 및 인트라넷 응용 프로그램 개발 학사",
-                "years": "2019 - 2022"
+                "years": "2019 - 2022",
+                "country": "마다가스카르",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 2,
                 "school": "피아나란차 대학교",
                 "degree": "모델링 및 컴퓨터 공학 석사",
-                "years": "2022 - 2024"
+                "years": "2022 - 2024",
+                "country": "마다가스카르",
+                "countryFlag": "🇲🇬"
             },
             {
                 "index": 3,
                 "school": "구스타브 에펠 대학교",
                 "degree": "지능형 시스템 및 응용 프로그램 석사 2학년",
-                "years": "2024 - 2025"
+                "years": "2024 - 2025",
+                "country": "프랑스",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 4,
                 "school": "구스타브 에펠 대학교",
                 "degree": "CMW 석사 2학년",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "프랑스",
+                "countryFlag": "🇫🇷"
             },
             {
                 "index": 5,
                 "school": "동의대학교",
                 "degree": "연구 여행",
-                "years": "2025 - 2026"
+                "years": "2025 - 2026",
+                "country": "대한민국",
+                "countryFlag": "🇰🇷"
             }
         ],
         "skills": [
